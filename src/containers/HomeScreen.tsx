@@ -1,7 +1,12 @@
-import React, { FunctionComponent } from 'react';
-import { useLoadScript, GoogleMap, LoadScriptProps } from '@react-google-maps/api';
+import React, { FunctionComponent, useState } from 'react';
+import { useLoadScript, LoadScriptProps } from '@react-google-maps/api';
+import { CircularProgress } from '@mui/material';
+
+import colours from '../assets/themes/colours';
 
 import Input from '../components/Input';
+import LocationsList from '../components/LocationsList';
+import Map from '../components/Map';
 
 const libraries: LoadScriptProps['libraries'] = ['places'];
 
@@ -11,13 +16,70 @@ const HomeScreen: FunctionComponent = () => {
         libraries,
     });
 
-    if (!isLoaded) {
+    const [map, setMap] = useState<google.maps.Map | null>((null));
+
+    const renderMapAndInput = () => {
+        if (!isLoaded) {
+            return (
+                <div
+                    style={{
+                        width: '100%',
+                        display: 'flex',
+                        gap: '20px',
+                        flex: 1,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                >
+                    <CircularProgress
+                        style={{
+                            height: '100px',
+                            width: '100px',
+                            color: colours.secondary,
+                        }}
+                    />
+                </div>
+            );
+        }
+
         return (
-            <p>
-                Loading...
-            </p>
+            <div
+                style={{
+                    width: '100%',
+                    display: 'flex',
+                    gap: '20px',
+                    flex: 1,
+                }}
+            >
+                <div
+                    style={{
+                        width: '50%',
+                        padding: '20px',
+                        display: 'flex',
+                        gap: '20px',
+                        flexDirection: 'column',
+                        justifyContent: 'flex-start',
+                    }}
+                >
+                    <Input map={map} />
+
+                    <h2
+                        style={{
+                            color: '#b4befe',
+                        }}
+                    >
+                        Search Results
+                    </h2>
+
+                    <LocationsList map={map} />
+                </div>
+
+                <Map
+                    setMap={setMap}
+                />
+            </div>
         );
-    }
+    };
 
     return (
         <div
@@ -41,46 +103,7 @@ const HomeScreen: FunctionComponent = () => {
                 React Redux Assessment
             </h1>
 
-            <div
-                style={{
-                    width: '100%',
-                    display: 'flex',
-                    gap: '20px',
-                    flex: 1,
-                }}
-            >
-                <div
-                    style={{
-                        width: '50%',
-                        // backgroundColor: 'red',
-                        padding: '20px',
-                        display: 'flex',
-                        gap: '20px',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                    }}
-                >
-                    <Input />
-
-                    <h2
-                        style={{
-                            color: '#b4befe',
-                        }}
-                    >
-                        Search Results
-                    </h2>
-                </div>
-
-                <GoogleMap
-                    zoom={15}
-                    center={{ lat: 3.15, lng: 101.71 }}
-                    mapContainerStyle={{
-                        width: '50%',
-                        backgroundColor: 'transparent',
-                        borderRadius: '10px',
-                    }}
-                />
-            </div>
+            {renderMapAndInput()}
         </div>
     );
 };

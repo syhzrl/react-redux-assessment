@@ -1,9 +1,10 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { Autocomplete, styled, TextField } from '@mui/material';
-import usePlacesAutocomplete, {
-    getGeocode,
-    getLatLng,
-} from 'use-places-autocomplete';
+import usePlacesAutocomplete from 'use-places-autocomplete';
+
+import { connect } from 'react-redux';
+import Actions from '../redux/Actions';
+import { AppDispatch } from '../redux/store';
 
 import colours from '../assets/themes/colours';
 
@@ -31,7 +32,14 @@ const StyledTextField = styled(TextField)({
     },
 });
 
-const Input: FunctionComponent = () => {
+interface InputProps {
+    map: google.maps.Map | null;
+    getCoords: (address: string, map: google.maps.Map) => void;
+}
+
+const Input: FunctionComponent<InputProps> = (props: InputProps) => {
+    const { map, getCoords } = props;
+
     const {
         ready,
         value,
@@ -40,19 +48,11 @@ const Input: FunctionComponent = () => {
         clearSuggestions,
     } = usePlacesAutocomplete();
 
-    const handleSelect = async (address: string) => {
-        const geocode = await getGeocode({ address });
-        const { lat, lng } = await getLatLng(geocode[0]);
-
-        console.log({
-            lat,
-            lng,
-        });
-    };
-
     const onChangeHandler = (selectedValue: string | null) => {
-        if (selectedValue) {
-            handleSelect(selectedValue);
+        if (selectedValue && map) {
+            getCoords(selectedValue, map);
+
+            // map.setCenter({ lat: 3.099, lng: 101.715 });
         }
     };
 
@@ -79,4 +79,8 @@ const Input: FunctionComponent = () => {
     );
 };
 
-export default Input;
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
+    getCoords: (address: string, map: google.maps.Map) => dispatch(Actions.getCoordsAttempt({ address, map })),
+});
+
+export default connect(null, mapDispatchToProps)(Input);
