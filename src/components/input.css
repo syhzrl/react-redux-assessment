@@ -1,0 +1,16 @@
+.MuiAutocomplete-popper .MuiAutocomplete-paper {
+    background-color: #313244;
+    margin-top: 10px;
+}
+
+.MuiAutocomplete-popper .MuiAutocomplete-paper .MuiAutocomplete-noOptions {
+    color: #cdd6f4;
+}
+
+.MuiAutocomplete-popper .MuiAutocomplete-paper .MuiAutocomplete-option {
+    color: #cdd6f4;
+}
+
+.MuiAutocomplete-popper .MuiAutocomplete-paper .MuiAutocomplete-option:hover {
+    background-color: #585b70;
+}

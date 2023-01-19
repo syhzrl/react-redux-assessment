@@ -1,9 +1,17 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent } from 'react';
+
+import HomeScreen from './containers/HomeScreen';
 
 const App: FunctionComponent = () => {
     return (
-        <div>
-            <h1>EYYO</h1>
+        <div
+            style={{
+                width: '100%',
+                height: '100vh',
+                display: 'flex',
+            }}
+        >
+            <HomeScreen />
         </div>
     );
 };
