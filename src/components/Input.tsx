@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import { Autocomplete, styled, TextField } from '@mui/material';
 import usePlacesAutocomplete from 'use-places-autocomplete';
 
@@ -51,8 +51,7 @@ const Input: FunctionComponent<InputProps> = (props: InputProps) => {
     const onChangeHandler = (selectedValue: string | null) => {
         if (selectedValue && map) {
             getCoords(selectedValue, map);
-
-            // map.setCenter({ lat: 3.099, lng: 101.715 });
+            setValue('');
         }
     };
 
@@ -65,12 +64,13 @@ const Input: FunctionComponent<InputProps> = (props: InputProps) => {
                 clearSuggestions();
                 setValue('');
             }}
+            value={value}
+            onInputChange={() => setValue('')}
             onChange={(e, newValue) => onChangeHandler(newValue)}
             popupIcon=''
             renderInput={(params) => (
                 <StyledTextField
                     {...params}
-                    value={value}
                     label='Search something'
                     onChange={(e) => setValue(e.target.value)}
                 />

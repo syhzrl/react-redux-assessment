@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import {
     getGeocode,
     getLatLng,
@@ -8,6 +8,8 @@ import {
 import { SagaWatcherReturnType } from '../types';
 
 import Actions from '../../redux/Actions';
+import Selectors from '../../redux/Selectors';
+import { Location } from '../../entities/map';
 
 export default function* watchGetCoords(): SagaWatcherReturnType {
     yield takeEvery('map/getCoordsAttempt', handleGetCoords);
@@ -15,6 +17,15 @@ export default function* watchGetCoords(): SagaWatcherReturnType {
 
 function* handleGetCoords(data: PayloadAction<{ address: string, map: google.maps.Map }>): any {
     const { address, map } = data.payload;
+
+    const locationsList = yield select(Selectors.mapGetCoordsList);
+
+    const addressAlreadyExists = locationsList.find((item: Location) => item.address === address);
+
+    if (addressAlreadyExists) {
+        yield put(Actions.getCoordsFailure('Address already added'));
+        return;
+    }
 
     const geocode = yield call(() => getGeocode({ address }));
     const { lat, lng } = yield call(() => getLatLng(geocode[0]));

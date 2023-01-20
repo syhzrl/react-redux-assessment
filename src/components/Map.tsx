@@ -1,12 +1,11 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
 
 import { connect } from 'react-redux';
 import Selectors from '../redux/Selectors';
-import { AppDispatch, RootState } from '../redux/store';
+import { RootState } from '../redux/store';
 
 import { Location } from '../entities/map';
-import Actions from '../redux/Actions';
 
 const center = { lat: 3.15, lng: 101.71 };
 

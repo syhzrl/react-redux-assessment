@@ -34,6 +34,9 @@ const mapSlice = createSlice({
                 state.error.getCoords = action.payload;
             }
         },
+        deleteCoords: (state, action: PayloadAction<string>) => {
+            state.locations = state.locations.filter(item => item.address !== action.payload);
+        },
     },
 });
 

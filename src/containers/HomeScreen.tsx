@@ -8,6 +8,8 @@ import Input from '../components/Input';
 import LocationsList from '../components/LocationsList';
 import Map from '../components/Map';
 
+import styles from './home-screen.module.css';
+
 const libraries: LoadScriptProps['libraries'] = ['places'];
 
 const HomeScreen: FunctionComponent = () => {
@@ -21,16 +23,7 @@ const HomeScreen: FunctionComponent = () => {
     const renderMapAndInput = () => {
         if (!isLoaded) {
             return (
-                <div
-                    style={{
-                        width: '100%',
-                        display: 'flex',
-                        gap: '20px',
-                        flex: 1,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}
-                >
+                <div className={styles['loader-container']}>
                     <CircularProgress
                         style={{
                             height: '100px',
@@ -43,33 +36,9 @@ const HomeScreen: FunctionComponent = () => {
         }
 
         return (
-            <div
-                style={{
-                    width: '100%',
-                    display: 'flex',
-                    gap: '20px',
-                    flex: 1,
-                }}
-            >
-                <div
-                    style={{
-                        width: '50%',
-                        padding: '20px',
-                        display: 'flex',
-                        gap: '20px',
-                        flexDirection: 'column',
-                        justifyContent: 'flex-start',
-                    }}
-                >
+            <div className={styles['inner-container']}>
+                <div className={styles['input-container']}>
                     <Input map={map} />
-
-                    <h2
-                        style={{
-                            color: '#b4befe',
-                        }}
-                    >
-                        Search Results
-                    </h2>
 
                     <LocationsList map={map} />
                 </div>
@@ -82,24 +51,8 @@ const HomeScreen: FunctionComponent = () => {
     };
 
     return (
-        <div
-            style={{
-                width: '100vw',
-                backgroundColor: '#1e1e2e',
-                display: 'flex',
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                padding: '40px',
-                flexDirection: 'column',
-                gap: '20px',
-            }}
-        >
-            <h1
-                style={{
-                    color: '#b4befe',
-                }}
-            >
+        <div className={styles['main-container']}>
+            <h1 className={styles.title}>
                 React Redux Assessment
             </h1>
 
