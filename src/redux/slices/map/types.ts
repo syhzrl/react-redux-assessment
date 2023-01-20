@@ -1,4 +1,4 @@
-import { Location } from '../../../entities/map';
+import { Location } from 'entities/map';
 
 export interface MapReduxState {
     actions: {

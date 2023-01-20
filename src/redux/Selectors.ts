@@ -1,5 +1,6 @@
-import { Location } from '../entities/map';
-import map from './slices/map/selectors';
+import map from 'redux/slices/map/selectors';
+
+import { Location } from 'entities/map';
 
 import { RootState } from './store';
 

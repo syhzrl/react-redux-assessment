@@ -1,13 +1,19 @@
 import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/toolkit';
 import createSagaMiddleware from '@redux-saga/core';
+import { createReduxHistoryContext } from 'redux-first-history';
+import { createBrowserHistory } from 'history';
 
-import rootSaga from '../sagas';
+import mapReducer from 'redux/slices/map';
 
-import mapReducer from './slices/map';
+import rootSaga from 'sagas';
 
 const sagaMiddleware = createSagaMiddleware();
+const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
+    history: createBrowserHistory(),
+});
 
 const rootReducer = combineReducers({
+    router: routerReducer,
     map: mapReducer.reducers,
 });
 
@@ -18,12 +24,13 @@ export const store = configureStore({
         serializableCheck: {
             ignoredActions: ['map/getCoordsAttempt'],
         },
-    }).concat(sagaMiddleware),
-    devTools: true,
+    }).concat(sagaMiddleware, routerMiddleware),
+    devTools: process.env.REACT_APP_STAGE !== 'prod',
 });
 
 sagaMiddleware.run(rootSaga);
 
+export const history = createReduxHistory(store);
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppThunk<ReturnType = void> = ThunkAction<

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Location } from 'entities/map';
 import { MapReduxState } from './types';
-import { Location } from '../../../entities/map';
 
 const initialState: MapReduxState = {
     actions: {

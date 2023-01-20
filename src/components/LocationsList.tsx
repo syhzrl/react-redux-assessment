@@ -3,14 +3,14 @@ import { CircularProgress } from '@mui/material';
 import { DeleteSharp } from '@mui/icons-material';
 
 import { connect } from 'react-redux';
-import Selectors from '../redux/Selectors';
-import { RootState, AppDispatch } from '../redux/store';
+import Selectors from 'redux/Selectors';
+import Actions from 'redux/Actions';
+import { RootState, AppDispatch } from 'redux/store';
 
-import { Location } from '../entities/map';
-import colours from '../assets/themes/colours';
+import { Location } from 'entities/map';
+import colours from 'assets/themes/colours';
 
 import styles from './locations-list.module.css';
-import Actions from '../redux/Actions';
 
 interface LocationsListProps {
     loading: boolean;

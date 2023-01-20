@@ -3,10 +3,10 @@ import { Autocomplete, styled, TextField } from '@mui/material';
 import usePlacesAutocomplete from 'use-places-autocomplete';
 
 import { connect } from 'react-redux';
-import Actions from '../redux/Actions';
-import { AppDispatch } from '../redux/store';
+import Actions from 'redux/Actions';
+import { AppDispatch } from 'redux/store';
 
-import colours from '../assets/themes/colours';
+import colours from 'assets/themes/colours';
 
 import './input.css';
 

@@ -1,8 +1,8 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 
-import HomeScreen from './containers/HomeScreen';
+import HomeScreen from 'containers/home';
 
-const App: FunctionComponent = () => {
+const App = (): JSX.Element => {
     return (
         <div
             style={{

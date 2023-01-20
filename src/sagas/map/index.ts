@@ -1,6 +1,6 @@
 import { fork } from 'redux-saga/effects';
 
-import { RootSagaReturnType } from '../types';
+import { RootSagaReturnType } from 'sagas/types';
 
 import watchGetCoords from './getCoords';
 
