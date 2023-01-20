@@ -11,7 +11,7 @@ import Actions from '../../redux/Actions';
 import Selectors from '../../redux/Selectors';
 import { Location } from '../../entities/map';
 
-export default function* watchGetCoords(): SagaWatcherReturnType {
+export default function* watchGetCoords(): any {
     yield takeEvery('map/getCoordsAttempt', handleGetCoords);
 }
 
