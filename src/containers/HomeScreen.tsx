@@ -1,8 +1,10 @@
 import React, { FunctionComponent, useState } from 'react';
-import { useLoadScript, LoadScriptProps } from '@react-google-maps/api';
+import { useLoadScript } from '@react-google-maps/api';
 import { CircularProgress } from '@mui/material';
 
 import colours from '../assets/themes/colours';
+
+import config from '../config';
 
 import Input from '../components/Input';
 import LocationsList from '../components/LocationsList';
@@ -10,12 +12,10 @@ import Map from '../components/Map';
 
 import styles from './home-screen.module.css';
 
-const libraries: LoadScriptProps['libraries'] = ['places'];
-
 const HomeScreen: FunctionComponent = () => {
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
-        libraries,
+        libraries: config.libraries,
     });
 
     const [map, setMap] = useState<google.maps.Map | null>((null));

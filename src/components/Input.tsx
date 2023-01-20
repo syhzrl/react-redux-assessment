@@ -62,8 +62,8 @@ const Input: FunctionComponent<InputProps> = (props: InputProps) => {
             disabled={!ready}
             onClose={() => {
                 clearSuggestions();
-                setValue('');
             }}
+            freeSolo
             value={value}
             onInputChange={() => setValue('')}
             onChange={(e, newValue) => onChangeHandler(newValue)}
@@ -71,7 +71,7 @@ const Input: FunctionComponent<InputProps> = (props: InputProps) => {
             renderInput={(params) => (
                 <StyledTextField
                     {...params}
-                    label='Search something'
+                    label='Search address'
                     onChange={(e) => setValue(e.target.value)}
                 />
             )}
