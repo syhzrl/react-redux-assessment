@@ -14,7 +14,7 @@ import styles from './home-screen.module.css';
 
 const HomeScreen: FunctionComponent = () => {
     const { isLoaded } = useLoadScript({
-        googleMapsApiKey: config.apiKey,
+        googleMapsApiKey: config.apiKey || '',
         libraries: config.libraries,
     });
 
