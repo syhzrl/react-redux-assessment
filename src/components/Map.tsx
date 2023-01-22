@@ -7,6 +7,8 @@ import { RootState } from 'redux/store';
 
 import { Location } from 'entities/map';
 
+import './map.css';
+
 const center = { lat: 3.15, lng: 101.71 };
 
 interface MapProps {
@@ -42,11 +44,7 @@ const Map: FunctionComponent<MapProps> = (props: MapProps) => {
         <GoogleMap
             zoom={13}
             center={center}
-            mapContainerStyle={{
-                width: '50%',
-                backgroundColor: 'transparent',
-                borderRadius: '10px',
-            }}
+            mapContainerClassName='map'
             onLoad={(map) => setMap(map)}
         >
             {renderMarkers()}

@@ -33,6 +33,9 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    overflow: auto;
+    flex: 1 1 0%;
+    padding-right: 10px;
 }
 
 .list-buttons-container {
@@ -46,7 +49,9 @@
     color: #cdd6f4;
     display: flex;
     flex-direction: column;
+    flex: 1;
     gap: 20px;
+    overflow: hidden;
 }
 
 .title-container {
@@ -58,4 +63,15 @@
 
 .title {
     color: #b4befe;
+}
+
+@media (max-width: 600px) {
+    .list-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        overflow: auto;
+        flex: 1 1 0%;
+        width: 100%;
+    }
 }
