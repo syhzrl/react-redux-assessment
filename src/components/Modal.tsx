@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { Dialog, List, ListItem } from '@mui/material';
+import { Close } from '@mui/icons-material';
 
 import styles from './modal.module.css';
 
@@ -19,9 +20,18 @@ const Modal: FunctionComponent<ModalProps> = (props: ModalProps) => {
             onClose={handleClose}
         >
             <div className={styles['main-container']}>
-                <h1>
-                    Personal Feedback
-                </h1>
+                <div className={styles['header-container']}>
+                    <h1>
+                        Personal Feedback
+                    </h1>
+
+                    <button
+                        className={styles['close-button']}
+                        onClick={() => handleClose(false)}
+                    >
+                        <Close />
+                    </button>
+                </div>
 
                 <div className={styles['list-container']}>
                     <h2>
