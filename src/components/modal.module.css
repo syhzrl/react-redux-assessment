@@ -1,0 +1,19 @@
+.main-container {
+    background-color: #1e1e2e;
+    padding: 40px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-container>h1 {
+    color: #b4befe;
+}
+
+.list-container {
+    color: #cdd6f4;
+}
+
+.list-container>h2 {
+    color: #89b4fa;
+}

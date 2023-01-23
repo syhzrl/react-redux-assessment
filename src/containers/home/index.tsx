@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import { useLoadScript } from '@react-google-maps/api';
 import { CircularProgress } from '@mui/material';
+import { InfoRounded } from '@mui/icons-material';
 
 import colours from 'assets/themes/colours';
 
@@ -10,6 +11,7 @@ import Input from 'components/Input';
 import LocationsList from 'components/LocationsList';
 import Map from 'components/Map';
 
+import Modal from 'components/Modal';
 import styles from './home-screen.module.css';
 
 const HomeScreen: FunctionComponent = () => {
@@ -19,6 +21,8 @@ const HomeScreen: FunctionComponent = () => {
     });
 
     const [map, setMap] = useState<google.maps.Map | null>((null));
+
+    const [isOpen, setIsOpen] = useState(false);
 
     const renderMapAndInput = () => {
         if (!isLoaded) {
@@ -52,11 +56,40 @@ const HomeScreen: FunctionComponent = () => {
 
     return (
         <div className={styles['main-container']}>
-            <h1 className={styles.title}>
-                React Redux Assessment
-            </h1>
+            <div
+                style={{
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: '10px',
+                }}
+            >
+                <h1 className={styles.title}>
+                    React Redux Assessment
+                </h1>
+
+                <button
+                    style={{
+                        backgroundColor: 'transparent',
+                        border: 'none',
+                        display: 'flex',
+                        alignItems: 'center',
+                        color: colours.primary,
+                        cursor: 'pointer',
+                    }}
+                    onClick={() => setIsOpen(!isOpen)}
+                >
+                    <InfoRounded />
+                </button>
+            </div>
 
             {renderMapAndInput()}
+
+            <Modal
+                isOpen={isOpen}
+                handleClose={() => setIsOpen(false)}
+            />
         </div>
     );
 };
